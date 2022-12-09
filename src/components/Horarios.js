@@ -1,8 +1,12 @@
 import styled from "styled-components"
+import Footer from "./Footer"
 
 export default function Horarios() {
     return (
-        <ContainerHorarios>Horarios</ContainerHorarios>
+        <>
+            <ContainerHorarios>Horarios</ContainerHorarios>
+            <Footer />
+        </>
     )
 }
 

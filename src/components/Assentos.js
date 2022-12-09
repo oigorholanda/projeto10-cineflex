@@ -1,8 +1,12 @@
 import styled from "styled-components"
+import Footer from "./Footer"
 
 export default function Assentos() {
     return (
-        <ContainerAssentos>Assentos</ContainerAssentos>
+        <>
+            <ContainerAssentos>Assentos</ContainerAssentos>
+            <Footer />
+        </>
     )
 }
 
