@@ -2,6 +2,8 @@ import axios from "axios"
 import { useEffect, useState } from "react";
 import styled from "styled-components"
 import Filme from "./Filme";
+import Loading from "../assets/loading.gif"
+import { Link } from "react-router-dom";
 
 
 export default function ListaFilmes() {
@@ -13,19 +15,29 @@ export default function ListaFilmes() {
         promise.catch((err) => console.log(err))
     }, []);
 
-    return (
-        <ContainerLista>
-            <p>Selecione o Filme</p>
-            <Lista>
-                {filmes.map((f) => <Filme key={f.id} title={f.title} img={f.posterURL} />)}
-            </Lista>
-        </ContainerLista>
-    )
+    if (filmes.length === 0) {
+        return (
+            <ContainerLista>
+                <p>Carregando...</p>
+                <img src={Loading} alt="loading gif" />
+            </ContainerLista>
+        )
+    } else {
+        return (
+            <ContainerLista>
+                <p>Selecione o filme</p>
+                <Lista>
+                    {filmes.map((f) => <Filme key={f.id} title={f.title} img={f.posterURL} id={f.id} />)}
+                </Lista>
+            </ContainerLista>
+        )
+    }
 }
 
 const ContainerLista = styled.div`
     font-family: 'Roboto', sans-serif;
     margin: 90px 0px;
+    text-align: center;
     p {
         text-align: center;
         font-size: 24px;
