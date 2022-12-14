@@ -4,36 +4,45 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components"
 import Footer from "./Footer"
 import Horario from "./Horario";
+import Loading from "../assets/loading.gif"
 
 export default function Horarios() {
     const { idFilme } = useParams();
     const [sessoes, setsessoes] = useState([])
-    const [filme, setfilme] = useState([])
+    const [filme, setfilme] = useState(undefined)
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme}/showtimes`)
         promise.then((res) => {
             setsessoes(res.data.days)
             setfilme(res.data)
-            console.log(res.data)
         })
         promise.catch((err) => console.log(err))
     }, []);
 
-    return (
-        <>
+    if (filme === undefined) {
+        return (
             <ContainerHorarios>
-                <p>Selecione o Horário</p>
-                {sessoes.map((s) => <Horario key={s.id} dia={s.weekday} data={s.date} horarios={s.showtimes} />)}
+                <p>Carregando...</p>
+                <img src={Loading} alt="loading gif" />
             </ContainerHorarios>
-            <Footer img={filme.posterURL} titulo={filme.title} />
-        </>
-    )
+        )
+    } else {
+        return (
+            <>
+                <ContainerHorarios>
+                    <p>Selecione o Horário</p>
+                    {sessoes.map((s) => <Horario key={s.id} dia={s.weekday} data={s.date} horarios={s.showtimes} />)}
+                </ContainerHorarios>
+                <Footer img={filme.posterURL} titulo={filme.title} dia={filme.weekday} />
+            </>
+        )
+    }
 }
 
 const ContainerHorarios = styled.div`
     font-family: 'Roboto', sans-serif;
-    margin: 90px 0px 120px 0px;
+    margin: 90px 0px 130px 0px;
     text-align: center;
     p {
         text-align: center;

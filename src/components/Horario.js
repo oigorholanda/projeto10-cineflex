@@ -2,31 +2,35 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 export default function Horario({ dia, data, horarios }) {
+
     return (
-        <Container>
-            <p>{dia} - {data}</p>
-            <Blink to='/assentos/:idSessao'>
-                {horarios.map((h) => <Hora>{h.name}</Hora>)}
-            </Blink>
-        </Container>
+        <>
+            <TituloSessoes>{dia} - {data}</TituloSessoes>
+            <Horarios>
+            {horarios.map((h) =>
+                <Blink to={`/assentos/${h.id}`}>
+                    <Hora>{h.name}</Hora>
+                </Blink>
+            )}
+            </Horarios>
+        </>
     )
 }
 
-const Container = styled.div`
-    p{
-        text-align: start;
-        font-size: 20px;
-    }
+const TituloSessoes = styled.h3`
+    text-align: start;
+    font-size: 20px;
+    margin: 25px;
+`
+const Horarios = styled.div`
+    display: flex;
+    justify-content: start;
+    align-items: center;
 `
 
 const Blink = styled(Link)`
-    width: 190px;
     margin-left: 25px;
     text-decoration: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
 `
 
 const Hora = styled.div`

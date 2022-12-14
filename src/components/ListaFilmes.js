@@ -3,11 +3,10 @@ import { useEffect, useState } from "react";
 import styled from "styled-components"
 import Filme from "./Filme";
 import Loading from "../assets/loading.gif"
-import { Link } from "react-router-dom";
 
 
 export default function ListaFilmes() {
-    const [filmes, setfilmes] = useState([])
+    const [filmes, setfilmes] = useState(undefined)
 
     useEffect(() => {
         const promise = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies')
@@ -15,7 +14,7 @@ export default function ListaFilmes() {
         promise.catch((err) => console.log(err))
     }, []);
 
-    if (filmes.length === 0) {
+    if (filmes === undefined) {
         return (
             <ContainerLista>
                 <p>Carregando...</p>

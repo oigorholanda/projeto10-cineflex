@@ -1,12 +1,12 @@
 import styled from "styled-components"
 
-export default function Footer({ img, titulo, horario }) {
+export default function Footer({ img, titulo, dia, horario }) {
     return (
         <Cfooter>
             <img src={img} alt={titulo} />
             <div>
                 <p>{titulo}</p>
-                <p>{horario}</p>
+                <p>{dia} {horario}</p>
             </div>
 
 
