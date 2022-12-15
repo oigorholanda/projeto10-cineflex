@@ -7,8 +7,8 @@ export default function Horario({ dia, data, horarios }) {
         <>
             <TituloSessoes>{dia} - {data}</TituloSessoes>
             <Horarios>
-            {horarios.map((h) =>
-                <Blink to={`/assentos/${h.id}`}>
+            {horarios.map((h) => 
+                <Blink to={`/assentos/${h.id}`} key={h.name}>
                     <Hora>{h.name}</Hora>
                 </Blink>
             )}

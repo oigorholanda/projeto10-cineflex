@@ -34,7 +34,7 @@ export default function Assentos() {
                 <MainAssentos>
                     <p>Selecione o(s) assento(s)</p>
                     <ContainerAssentos>
-                        {assento.map((a) => <Assento key={assento.id} nome={a.name} />)}
+                        {assento.map((a) => <Assento key={a.id} nome={a.name} />)}
                     </ContainerAssentos>
 
                 <Form>
